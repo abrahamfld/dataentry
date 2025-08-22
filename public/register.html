@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | GhanaDataEntry</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2e86de',
+                        secondary: '#10ac84',
+                        accent: '#ff9f43',
+                        warning: '#ee5253',
+                        light: '#f5f5f5',
+                        dark: '#222',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .hero-pattern {
+            background-color: #2e86de;
+            background-image: linear-gradient(135deg, #2e86de 0%, #10ac84 100%);
+        }
+        .file-upload {
+            border: 2px dashed #cbd5e0;
+            border-radius: 0.5rem;
+            transition: all 0.3s;
+        }
+        .file-upload:hover {
+            border-color: #2e86de;
+        }
+        .preview-container {
+            display: none;
+            position: relative;
+        }
+        .remove-image {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #ee5253;
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .payment-option {
+            border: 2px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .payment-option.active {
+            border-color: #2e86de;
+            background-color: #f0f7ff;
+        }
+        .payment-option:hover {
+            border-color: #2e86de;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .loading-spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            color: white;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.3s, transform 0.3s;
+        }
+        .toast.success {
+            background-color: #10ac84;
+        }
+        .toast.error {
+            background-color: #ee5253;
+        }
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Toast notification -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Header -->
+    <header class="hero-pattern text-white py-6">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center">
+                        <div class="bg-white text-primary rounded-full w-12 h-12 flex items-center justify-center mr-3">
+                            <i class="fas fa-laptop-code text-2xl"></i>
+                        </div>
+                        <h1 class="text-2xl md:text-3xl font-bold">GhanaDataEntry</h1>
+                    </a>
+                </div>
+                <a href="index.html" class="text-white hover:text-blue-100 transition">
+                    <i class="fas fa-arrow-left mr-2"></i> Back to Home
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Registration Section -->
+    <section class="py-12">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+                    <div class="md:flex">
+                        <div class="md:w-1/3 bg-gradient-to-b from-primary to-secondary p-8 text-white flex flex-col justify-center">
+                            <div class="text-center mb-6">
+                                <i class="fas fa-user-check text-5xl mb-4"></i>
+                                <h2 class="text-2xl font-bold">Complete Registration</h2>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="flex items-start">
+                                    <div class="bg-white text-primary rounded-full w-8 h-8 flex items-center justify-center mr-3 flex-shrink-0">
+                                        <span class="font-bold">1</span>
+                                    </div>
+                                    <p>Fill in your personal information</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="bg-white text-primary rounded-full w-8 h-8 flex items-center justify-center mr-3 flex-shrink-0">
+                                        <span class="font-bold">2</span>
+                                    </div>
+                                    <p>Upload Ghana Card (front & back)</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="bg-white text-primary rounded-full w-8 h-8 flex items-center justify-center mr-3 flex-shrink-0">
+                                        <span class="font-bold">3</span>
+                                    </div>
+                                    <p>Select payment method</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="bg-white text-primary rounded-full w-8 h-8 flex items-center justify-center mr-3 flex-shrink-0">
+                                        <span class="font-bold">4</span>
+                                    </div>
+                                    <p>Submit for verification</p>
+                                </div>
+                            </div>
+                            <div class="mt-8 p-4 bg-blue-800 bg-opacity-20 rounded-lg">
+                                <p class="text-sm"><i class="fas fa-shield-alt mr-2"></i> Your information is protected with encryption</p>
+                            </div>
+                        </div>
+                        <div class="p-8 md:w-2/3">
+                            <h2 class="text-2xl font-bold text-gray-800 mb-6">Create Your Account</h2>
+                            <form id="registrationForm" class="space-y-6">
+                                <!-- Personal Information -->
+                                <div>
+                                    <h3 class="text-lg font-semibold text-gray-800 mb-4 border-b pb-2">Personal Information</h3>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div>
+                                            <label class="block text-gray-700 text-sm font-medium mb-1" for="fullName">Full Name *</label>
+                                            <input class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" 
+                                                id="fullName" name="fullName" type="text" required placeholder="Enter your full name">
+                                        </div>
+                                        <div>
+                                            <label class="block text-gray-700 text-sm font-medium mb-1" for="email">Email Address *</label>
+                                            <input class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" 
+                                                id="email" name="email" type="email" required placeholder="Enter your email">
+                                        </div>
+                                        <div>
+                                            <label class="block text-gray-700 text-sm font-medium mb-1" for="phone">Phone Number *</label>
+                                            <input class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" 
+                                                id="phone" name="phone" type="tel" required placeholder="e.g., 020 123 4567">
+                                        </div>
+                                        <div>
+                                            <label class="block text-gray-700 text-sm font-medium mb-1" for="location">Location *</label>
+                                            <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" 
+                                                id="location" name="location" required>
+                                                <option value="">Select your region</option>
+                                                <option value="accra">Greater Accra</option>
+                                                <option value="ashanti">Ashanti</option>
+                                                <option value="eastern">Eastern</option>
+                                                <option value="western">Western</option>
+                                                <option value="central">Central</option>
+                                                <option value="volta">Volta</option>
+                                                <option value="brong">Brong Ahafo</option>
+                                                <option value="northern">Northern</option>
+                                                <option value="upper-east">Upper East</option>
+                                                <option value="upper-west">Upper West</option>
+                                                <option value="other">Other</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Ghana Card Upload -->
+                                <div>
+                                    <h3 class="text-lg font-semibold text-gray-800 mb-4 border-b pb-2">Ghana Card Verification</h3>
+                                    <p class="text-gray-600 text-sm mb-4">Upload clear photos of both sides of your Ghana Card. Make sure all details are visible.</p>
+                                    
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <!-- Front Side -->
+                                        <div>
+                                            <label class="block text-gray-700 text-sm font-medium mb-2">Front Side *</label>
+                                            <div class="file-upload p-4 text-center mb-2" id="ghanaCardFrontUpload">
+                                                <i class="fas fa-id-card text-2xl text-gray-400 mb-2"></i>
+                                                <p class="text-gray-600 text-sm">Ghana Card Front</p>
+                                                <p class="text-gray-500 text-xs">JPG or PNG (max. 5MB)</p>
+                                                <input type="file" id="ghanaCardFront" name="ghanaCardFront" accept="image/*" class="hidden" required>
+                                            </div>
+                                            <div class="preview-container mt-2" id="ghanaCardFrontPreview">
+                                                <img src="" alt="Ghana Card front preview" class="max-h-40 rounded-lg mx-auto">
+                                                <div class="remove-image" onclick="removeImage('ghanaCardFront')">
+                                                    <i class="fas fa-times"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Back Side -->
+                                        <div>
+                                            <label class="block text-gray-700 text-sm font-medium mb-2">Back Side *</label>
+                                            <div class="file-upload p-4 text-center mb-2" id="ghanaCardBackUpload">
+                                                <i class="fas fa-id-card text-2xl text-gray-400 mb-2"></i>
+                                                <p class="text-gray-600 text-sm">Ghana Card Back</p>
+                                                <p class="text-gray-500 text-xs">JPG or PNG (max. 5MB)</p>
+                                                <input type="file" id="ghanaCardBack" name="ghanaCardBack" accept="image/*" class="hidden" required>
+                                            </div>
+                                            <div class="preview-container mt-2" id="ghanaCardBackPreview">
+                                                <img src="" alt="Ghana Card back preview" class="max-h-40 rounded-lg mx-auto">
+                                                <div class="remove-image" onclick="removeImage('ghanaCardBack')">
+                                                    <i class="fas fa-times"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Payment Method Selection -->
+                                <div>
+                                    <h3 class="text-lg font-semibold text-gray-800 mb-4 border-b pb-2">Payment Method</h3>
+                                    <p class="text-gray-600 text-sm mb-4">Select how you would like to receive your payments</p>
+                                    
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                                        <div class="payment-option" id="bankOption" onclick="selectPayment('bank')">
+                                            <div class="flex items-center">
+                                                <div class="w-10 h-10 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mr-3">
+                                                    <i class="fas fa-university text-primary"></i>
+                                                </div>
+                                                <div>
+                                                    <h4 class="font-semibold">Bank Transfer</h4>
+                                                    <p class="text-sm text-gray-600">Direct to your bank account</p>
+                                                </div>
+                                            </div>
+                                            <div class="mt-2 pt-2 border-t border-gray-100">
+                                                <div class="flex items-center text-sm text-gray-500">
+                                                    <i class="fas fa-clock mr-1"></i>
+                                                    <span>1-2 business days</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="payment-option" id="momoOption" onclick="selectPayment('momo')">
+                                            <div class="flex items-center">
+                                                <div class="w-10 h-10 bg-secondary bg-opacity-10 rounded-full flex items-center justify-center mr-3">
+                                                    <i class="fas fa-mobile-alt text-secondary"></i>
+                                                </div>
+                                                <div>
+                                                    <h4 class="font-semibold">Mobile Money</h4>
+                                                    <p class="text-sm text-gray-600">Direct to your mobile wallet</p>
+                                                </div>
+                                            </div>
+                                            <div class="mt-2 pt-2 border-t border-gray-100">
+                                                <div class="flex items-center text-sm text-gray-500">
+                                                    <i class="fas fa-bolt mr-1"></i>
+                                                    <span>Instant transfer</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <input type="hidden" id="paymentMethod" name="paymentMethod" value="">
+                                    
+                                    <!-- Bank Details Form -->
+                                    <div id="bankDetails" class="tab-content bg-gray-50 p-4 rounded-lg mb-4">
+                                        <h4 class="font-medium text-gray-800 mb-3">Bank Account Information</h4>
+                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            <div>
+                                                <label class="block text-gray-700 text-sm font-medium mb-1" for="bankName">Bank Name *</label>
+                                                <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" 
+                                                    id="bankName" name="bankName">
+                                                    <option value="">Select your bank</option>
+                                                    <option value="absa">Absa Bank Ghana</option>
+                                                    <option value="ecobank">Ecobank Ghana</option>
+                                                    <option value="gtbank">GT Bank Ghana</option>
+                                                    <option value="calbank">CAL Bank</option>
+                                                    <option value="adb">Agricultural Development Bank</option>
+                                                    <option value="fidelity">Fidelity Bank Ghana</option>
+                                                    <option value="firstatlantic">First Atlantic Bank</option>
+                                                    <option value="republic">Republic Bank Ghana</option>
+                                                    <option value="stanbic">Stanbic Bank Ghana</option>
+                                                    <option value="standardchartered">Standard Chartered Bank Ghana</option>
+                                                    <option value="zenith">Zenith Bank Ghana</option>
+                                                    <option value="other">Other Bank</option>
+                                                </select>
+                                            </div>
+                                            <div>
+                                                <label class="block text-gray-700 text-sm font-medium mb-1" for="accountNumber">Account Number *</label>
+                                                <input class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" 
+                                                    id="accountNumber" name="accountNumber" type="text" placeholder="Enter account number">
+                                            </div>
+                                            <div>
+                                                <label class="block text-gray-700 text-sm font-medium mb-1" for="accountName">Account Name *</label>
+                                                <input class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" 
+                                                    id="accountName" name="accountName" type="text" placeholder="Name as it appears on bank account">
+                                            </div>
+                                            <div>
+                                                <label class="block text-gray-700 text-sm font-medium mb-1" for="branch">Branch (Optional)</label>
+                                                <input class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" 
+                                                    id="branch" name="branch" type="text" placeholder="Bank branch">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Mobile Money Details Form -->
+                                    <div id="momoDetails" class="tab-content bg-gray-50 p-4 rounded-lg mb-4">
+                                        <h4 class="font-medium text-gray-800 mb-3">Mobile Money Information</h4>
+                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            <div>
+                                                <label class="block text-gray-700 text-sm font-medium mb-1" for="momoProvider">Provider *</label>
+                                                <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" 
+                                                    id="momoProvider" name="momoProvider">
+                                                    <option value="">Select provider</option>
+                                                    <option value="mtn">MTN Mobile Money</option>
+                                                    <option value="vodafone">Vodafone Cash</option>
+                                                    <option value="airteltigo">AirtelTigo Money</option>
+                                                </select>
+                                            </div>
+                                            <div>
+                                                <label class="block text-gray-700 text-sm font-medium mb-1" for="momoNumber">Phone Number *</label>
+                                                <input class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" 
+                                                    id="momoNumber" name="momoNumber" type="tel" placeholder="e.g., 020 123 4567">
+                                            </div>
+                                            <div>
+                                                <label class="block text-gray-700 text-sm font-medium mb-1" for="momoName">Account Name *</label>
+                                                <input class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" 
+                                                    id="momoName" name="momoName" type="text" placeholder="Name registered with mobile money">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Terms and Submit -->
+                                <div class="pt-4">
+                                    <div class="flex items-start mb-6">
+                                        <input type="checkbox" id="terms" name="terms" class="mt-1 mr-3" required>
+                                        <label for="terms" class="text-gray-700 text-sm">
+                                            I agree to the <a href="#" class="text-primary hover:underline">Terms of Service</a> and <a href="#" class="text-primary hover:underline">Privacy Policy</a>. 
+                                            I confirm that all information provided is accurate and belongs to me.
+                                        </label>
+                                    </div>
+                                    
+                                    <button type="submit" id="submitButton" class="w-full bg-secondary hover:bg-green-600 text-white font-bold py-3 px-4 rounded-lg transition duration-300 flex items-center justify-center">
+                                        <i class="fas fa-paper-plane mr-2"></i> Submit Application
+                                        <div class="loading-spinner ml-2"></div>
+                                    </button>
+                                    
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Security Notice -->
+                <div class="mt-8 bg-blue-50 border border-blue-200 rounded-lg p-6">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-lock text-blue-500 text-xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2">Your Security is Important</h3>
+                            <p class="text-gray-700 text-sm">
+                                All information you provide is encrypted and securely stored. We will never share your banking or mobile money details 
+                                with unauthorized parties. Your Ghana Card information is used solely for verification purposes to prevent fraud.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-12 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">GhanaDataEntry</h3>
+                    <p class="text-gray-400">Providing legitimate work-from-home opportunities for Ghanaians since 2020.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">How It Works</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">FAQ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contact Us</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center text-gray-400"><i class="fas fa-envelope mr-2"></i> info@ghanadataentry.com</li>
+                        <li class="flex items-center text-gray-400"><i class="fas fa-phone mr-2"></i> +233 24 123 4567</li>
+                        <li class="flex items-center text-gray-400"><i class="fas fa-map-marker-alt mr-2"></i> Accra, Ghana</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Follow Us</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f text-lg"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter text-lg"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram text-lg"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-linkedin-in text-lg"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2023 GhanaDataEntry. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Server configuration
+        const SERVER_URL = 'http://localhost:3000'; // Change this to your server URL
+        
+        // Show toast notification
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = `toast ${type} show`;
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 5000);
+        }
+        
+        // Payment method selection
+        function selectPayment(method) {
+            // Update UI
+            document.querySelectorAll('.payment-option').forEach(option => {
+                option.classList.remove('active');
+            });
+            document.getElementById(method + 'Option').classList.add('active');
+            
+            // Update hidden field
+            document.getElementById('paymentMethod').value = method;
+            
+            // Show appropriate form
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            if (method === 'bank') {
+                document.getElementById('bankDetails').classList.add('active');
+            } else if (method === 'momo') {
+                document.getElementById('momoDetails').classList.add('active');
+            }
+        }
+        
+        // File upload functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Ghana Card Front upload
+            setupFileUpload('ghanaCardFront');
+            
+            // Ghana Card Back upload
+            setupFileUpload('ghanaCardBack');
+            
+            // Form submission
+            document.getElementById('registrationForm').addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                // Show loading state
+                const submitButton = document.getElementById('submitButton');
+                const spinner = submitButton.querySelector('.loading-spinner');
+                submitButton.disabled = true;
+                spinner.style.display = 'inline-block';
+                
+                try {
+                    // Validate payment method selection
+                    const paymentMethod = document.getElementById('paymentMethod').value;
+                    if (!paymentMethod) {
+                        throw new Error('Please select a payment method');
+                    }
+                    
+                    // Validate payment details based on selection
+                    let paymentDetails = {};
+                    if (paymentMethod === 'bank') {
+                        const bankName = document.getElementById('bankName').value;
+                        const accountNumber = document.getElementById('accountNumber').value;
+                        const accountName = document.getElementById('accountName').value;
+                        
+                        if (!bankName || !accountNumber || !accountName) {
+                            throw new Error('Please complete all required bank details');
+                        }
+                        
+                        paymentDetails = {
+                            method: 'bank',
+                            bankName,
+                            accountNumber,
+                            accountName,
+                            branch: document.getElementById('branch').value
+                        };
+                    } else if (paymentMethod === 'momo') {
+                        const momoProvider = document.getElementById('momoProvider').value;
+                        const momoNumber = document.getElementById('momoNumber').value;
+                        const momoName = document.getElementById('momoName').value;
+                        
+                        if (!momoProvider || !momoNumber || !momoName) {
+                            throw new Error('Please complete all required mobile money details');
+                        }
+                        
+                        paymentDetails = {
+                            method: 'momo',
+                            provider: momoProvider,
+                            number: momoNumber,
+                            name: momoName
+                        };
+                    }
+                    
+                    // Upload Ghana Card images
+                    const ghanaCardFrontFile = document.getElementById('ghanaCardFront').files[0];
+                    const ghanaCardBackFile = document.getElementById('ghanaCardBack').files[0];
+                    
+                    if (!ghanaCardFrontFile || !ghanaCardBackFile) {
+                        throw new Error('Please upload both sides of your Ghana Card');
+                    }
+                    
+                    // Upload images to server
+                    const [frontResponse, backResponse] = await Promise.all([
+                        uploadImage(ghanaCardFrontFile),
+                        uploadImage(ghanaCardBackFile)
+                    ]);
+                    
+                    // Prepare registration data
+                    const registrationData = {
+                        personalInfo: {
+                            fullName: document.getElementById('fullName').value,
+                            email: document.getElementById('email').value,
+                            phone: document.getElementById('phone').value,
+                            location: document.getElementById('location').value
+                        },
+                        ghanaCard: {
+                            front: frontResponse,
+                            back: backResponse
+                        },
+                        payment: paymentDetails,
+                        agreedToTerms: document.getElementById('terms').checked
+                    };
+                    
+                    // Send registration data to server
+                    // You would need to create this endpoint on your server
+                    const response = await fetch(`${SERVER_URL}/register`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(registrationData)
+                    });
+                    
+                    // Check if response is JSON
+                    const contentType = response.headers.get('content-type');
+                    if (!contentType || !contentType.includes('application/json')) {
+                        const text = await response.text();
+                        console.error('Server returned non-JSON response:', text.substring(0, 200));
+                        throw new Error('Server error. Please try again later.');
+                    }
+                    
+                    const result = await response.json();
+                    
+                    if (!response.ok) {
+                        throw new Error(result.error || 'Registration failed');
+                    }
+                    
+                    // Success
+                    showToast('Registration submitted successfully! Your account will be activated after verification.');
+                    
+                    // Reset form
+                    this.reset();
+                    document.querySelectorAll('.preview-container').forEach(preview => {
+                        preview.style.display = 'none';
+                    });
+                    document.querySelectorAll('.payment-option').forEach(option => {
+                        option.classList.remove('active');
+                    });
+                    document.querySelectorAll('.tab-content').forEach(tab => {
+                        tab.classList.remove('active');
+                    });
+                    document.getElementById('paymentMethod').value = '';
+                    
+                } catch (error) {
+                    console.error('Registration error:', error);
+                    showToast(`Error: ${error.message}`, 'error');
+                } finally {
+                    // Hide loading state
+                    submitButton.disabled = false;
+                    spinner.style.display = 'none';
+                }
+            });
+        });
+        
+        // Function to upload image to server
+        async function uploadImage(file) {
+            const formData = new FormData();
+            formData.append('image', file);
+            
+            const response = await fetch(`${SERVER_URL}/upload`, {
+                method: 'POST',
+                body: formData
+            });
+            
+            // Check if response is JSON
+            const contentType = response.headers.get('content-type');
+            if (!contentType || !contentType.includes('application/json')) {
+                const text = await response.text();
+                console.error('Server returned non-JSON response:', text.substring(0, 200));
+                throw new Error('Image upload failed. Please try again.');
+            }
+            
+            const result = await response.json();
+            
+            if (!response.ok) {
+                throw new Error(result.error || 'Image upload failed');
+            }
+            
+            return result;
+        }
+        
+        function setupFileUpload(fieldName) {
+            const uploadArea = document.getElementById(fieldName + 'Upload');
+            const fileInput = document.getElementById(fieldName);
+            const previewContainer = document.getElementById(fieldName + 'Preview');
+            
+            uploadArea.addEventListener('click', function() {
+                fileInput.click();
+            });
+            
+            uploadArea.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                this.classList.add('border-primary');
+            });
+            
+            uploadArea.addEventListener('dragleave', function() {
+                this.classList.remove('border-primary');
+            });
+            
+            uploadArea.addEventListener('drop', function(e) {
+                e.preventDefault();
+                this.classList.remove('border-primary');
+                if (e.dataTransfer.files.length) {
+                    fileInput.files = e.dataTransfer.files;
+                    previewImage(e.dataTransfer.files[0], previewContainer);
+                }
+            });
+            
+            fileInput.addEventListener('change', function() {
+                if (this.files && this.files[0]) {
+                    previewImage(this.files[0], previewContainer);
+                }
+            });
+        }
+        
+        function previewImage(file, previewContainer) {
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                const img = previewContainer.querySelector('img');
+                img.src = e.target.result;
+                previewContainer.style.display = 'block';
+            }
+            
+            reader.readAsDataURL(file);
+        }
+        
+        function removeImage(fieldName) {
+            document.getElementById(fieldName).value = '';
+            document.getElementById(fieldName + 'Preview').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

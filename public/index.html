@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GhanaDataEntry | Work From Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2e86de',
+                        secondary: '#10ac84',
+                        accent: '#ff9f43',
+                        warning: '#ee5253',
+                        light: '#f5f5f5',
+                        dark: '#222',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .hero-pattern {
+            background-color: #2e86de;
+            background-image: linear-gradient(135deg, #2e86de 0%, #10ac84 100%);
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .testimonial-card {
+            transition: all 0.3s ease;
+        }
+        .testimonial-card:hover {
+            transform: scale(1.02);
+        }
+        .success-card {
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        .success-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.15);
+        }
+        .counter {
+            font-variant-numeric: tabular-nums;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="hero-pattern text-white py-6">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center mb-4 md:mb-0">
+                    <div class="bg-white text-primary rounded-full w-12 h-12 flex items-center justify-center mr-3">
+                        <i class="fas fa-laptop-code text-2xl"></i>
+                    </div>
+                    <h1 class="text-2xl md:text-3xl font-bold">GhanaDataEntry</h1>
+                </div>
+                <div class="flex items-center space-x-6">
+                    <a href="./login.html" class="text-white hover:text-blue-100 transition">Login</a>
+                    <a href="./register.html" class="bg-accent hover:bg-orange-500 text-white font-bold py-2 px-6 rounded-full transition duration-300">Register</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-pattern text-white py-16 md:py-20">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">Earn From Home with Simple Data Entry Tasks</h2>
+                <p class="text-xl mb-8">Join thousands of Ghanaians who are earning a stable income working from the comfort of their homes. No experience needed!</p>
+                <a href="./register.html" class="bg-accent hover:bg-orange-500 text-white font-bold py-4 px-10 rounded-full text-lg inline-flex items-center transition duration-300 transform hover:scale-105">
+                    <i class="fas fa-user-plus mr-2"></i> Register Now
+                </a>
+                <p class="mt-6 text-blue-100">No payment required. Start earning in less than 24 hours.</p>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Features Section -->
+    <section class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">Why Choose GhanaDataEntry?</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="feature-card bg-white rounded-xl p-8 shadow-md transition duration-300">
+                    <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center text-white text-2xl mb-6">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Flexible Hours</h3>
+                    <p class="text-gray-600">Work whenever you want, wherever you want. Perfect for students, parents, and anyone looking to earn extra income.</p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="feature-card bg-white rounded-xl p-8 shadow-md transition duration-300">
+                    <div class="w-16 h-16 bg-secondary rounded-full flex items-center justify-center text-white text-2xl mb-6">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Weekly Payments</h3>
+                    <p class="text-gray-600">Get paid reliably every week through Mobile Money or direct bank transfer. No delays, no excuses.</p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="feature-card bg-white rounded-xl p-8 shadow-md transition duration-300">
+                    <div class="w-16 h-16 bg-accent rounded-full flex items-center justify-center text-white text-2xl mb-6">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">No Commuting</h3>
+                    <p class="text-gray-600">Save time and money by working from home. All you need is a smartphone or computer with internet connection.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">How It Works</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Step 1 -->
+                <div class="bg-light rounded-xl p-6 text-center shadow-md">
+                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-xl font-bold mb-4 mx-auto">1</div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-3">Apply Online</h3>
+                    <p class="text-gray-600">Fill out our simple application form with your basic details.</p>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="bg-light rounded-xl p-6 text-center shadow-md">
+                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-xl font-bold mb-4 mx-auto">2</div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-3">Free Training</h3>
+                    <p class="text-gray-600">Complete our short online training program at no cost to you.</p>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="bg-light rounded-xl p-6 text-center shadow-md">
+                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-xl font-bold mb-4 mx-auto">3</div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-3">Start Working</h3>
+                    <p class="text-gray-600">Begin completing simple data tasks and earn as you work.</p>
+                </div>
+                
+                <!-- Step 4 -->
+                <div class="bg-light rounded-xl p-6 text-center shadow-md">
+                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white text-xl font-bold mb-4 mx-auto">4</div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-3">Get Paid</h3>
+                    <p class="text-gray-600">Receive your earnings every week through your preferred method.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Stories -->
+    <section class="py-16 bg-gradient-to-br from-primary to-secondary">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-4">Real Success Stories</h2>
+            <p class="text-xl text-center text-blue-100 mb-12">See how GhanaDataEntry has changed lives across Ghana</p>
+            
+            <div classgrid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Story 1 -->
+                <div class="success-card bg-white rounded-xl p-6 shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">A</div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Ama, Kumasi</h4>
+                            <p class="text-gray-600">Working for 8 months</p>
+                        </div>
+                    </div>
+                    <div class="bg-green-50 rounded-lg p-4 mb-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-700">Total Earned</span>
+                            <span class="text-xl font-bold text-green-600">₵6,420</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">"I've been able to support my family without having to travel to Accra for work. The flexible hours let me care for my children while earning."</p>
+                    <div class="flex text-accent">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Story 2 -->
+                <div class="success-card bg-white rounded-xl p-6 shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-14 h-14 bg-secondary rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">K</div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Kofi, Accra</h4>
+                            <p class="text-gray-600">Working for 5 months</p>
+                        </div>
+                    </div>
+                    <div class="bg-green-50 rounded-lg p-4 mb-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-700">Total Earned</span>
+                            <span class="text-xl font-bold text-green-600">₵3,850</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">"As a student, this has been perfect. I work between classes and the payments cover my expenses. I'll graduate without debt thanks to GhanaDataEntry."</p>
+                    <div class="flex text-accent">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Story 3 -->
+                <div class="success-card bg-white rounded-xl p-6 shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-14 h-14 bg-accent rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">E</div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Esi, Tamale</h4>
+                            <p class="text-gray-600">Working for 1 year</p>
+                        </div>
+                    </div>
+                    <div class="bg-green-50 rounded-lg p-4 mb-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-700">Total Earned</span>
+                            <span class="text-xl font-bold text-green-600">₵9,150</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">"I was able to start my small business with the savings from this work. Now I have two sources of income thanks to the flexibility of data entry."</p>
+                    <div class="flex text-accent">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="./register.html" class="bg-white text-primary hover:bg-blue-50 font-bold py-4 px-10 rounded-full text-lg inline-flex items-center transition duration-300">
+                    <i class="fas fa-play-circle mr-2"></i> Start Your Success Story
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scam Warning -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="bg-red-50 border-l-4 border-warning rounded-lg p-8">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-exclamation-triangle text-warning text-3xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">Protect Yourself From Job Scams</h3>
+                        <p class="text-gray-700 mb-4">While legitimate work-from-home opportunities exist, scammers often target job seekers in Ghana. Please be aware:</p>
+                        <ul class="list-disc pl-5 text-gray-700 mb-4">
+                            <li class="mb-2">We will <strong>NEVER</strong> ask for your Ghana Card PIN or password</li>
+                            <li class="mb-2">We will <strong>NEVER</strong> request payment for training or "starter kits"</li>
+                            <li class="mb-2">We will <strong>NEVER</strong> contact you first via WhatsApp offering jobs</li>
+                            <li>Legitimate companies won't ask you to pay fees to receive payment</li>
+                        </ul>
+                        <p class="text-gray-700">Always verify company information before sharing personal details. Report suspicious job offers to the Cyber Security Authority.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">What Our Workers Say</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card bg-white rounded-xl p-6 shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold mr-4">A</div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Ama, Kumasi</h4>
+                            <div class="flex text-accent">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">"I've been working with GhanaDataEntry for 8 months now. The income has helped me support my family without having to travel to Accra for work."</p>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card bg-white rounded-xl p-6 shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center text-white font-bold mr-4">K</div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Kofi, University of Ghana</h4>
+                            <div class="flex text-accent">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">"As a student, the flexible hours are perfect. I work between classes and the weekly payments help cover my expenses."</p>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card bg-white rounded-xl p-6 shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-accent rounded-full flex items-center justify-center text-white font-bold mr-4">E</div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Esi, Tamale</h4>
+                            <div class="flex text-accent">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">"I was cautious at first because of all the scams, but GhanaDataEntry is legitimate. They never asked for money or my Ghana Card PIN."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto bg-primary rounded-2xl shadow-xl overflow-hidden">
+                <div class="md:flex items-center">
+                    <div class="md:w-2/5 p-8 text-center">
+                        <i class="fas fa-laptop-house text-6xl text-white mb-4"></i>
+                        <h3 class="text-2xl font-bold text-white">Ready to Get Started?</h3>
+                    </div>
+                    <div class="md:w-3/5 p-8 bg-white">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-4">Begin your journey to financial freedom</h2>
+                        <p class="text-gray-600 mb-6">Join thousands of Ghanaians who are already earning from home with our simple data entry tasks.</p>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <a href="./register.html" class="bg-accent hover:bg-orange-500 text-white font-bold py-3 px-6 rounded-lg text-center transition duration-300">
+                                Create Account
+                            </a>
+                            <a href="./login.html" class="border border-primary text-primary hover:bg-primary hover:text-white font-bold py-3 px-6 rounded-lg text-center transition duration-300">
+                                Login Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">GhanaDataEntry</h3>
+                    <p class="text-gray-400">Providing legitimate work-from-home opportunities for Ghanaians since 2020.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">How It Works</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">FAQ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contact Us</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center text-gray-400"><i class="fas fa-envelope mr-2"></i> info@ghanadataentry.com</li>
+                        <li class="flex items-center text-gray-400"><i class="fas fa-phone mr-2"></i> +233 24 123 4567</li>
+                        <li class="flex items-center text-gray-400"><i class="fas fa-map-marker-alt mr-2"></i> Accra, Ghana</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Follow Us</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f text-lg"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter text-lg"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram text-lg"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-linkedin-in text-lg"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2023 GhanaDataEntry. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Animated counter
+        document.addEventListener('DOMContentLoaded', function() {
+            const counters = document.querySelectorAll('.counter');
+            const speed = 200;
+            
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                let count = 0;
+                const increment = target / speed;
+                
+                const updateCount = () => {
+                    if (count < target) {
+                        count += increment;
+                        counter.innerText = Math.floor(count).toLocaleString();
+                        setTimeout(updateCount, 1);
+                    } else {
+                        counter.innerText = target.toLocaleString();
+                    }
+                };
+                
+                updateCount();
+            });
+        });
+    </script>
+</body>
+</html>

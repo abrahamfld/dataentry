@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | GhanaDataEntry</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2e86de',
+                        secondary: '#10ac84',
+                        accent: '#ff9f43',
+                        warning: '#ee5253',
+                        light: '#f5f5f5',
+                        dark: '#222',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .hero-pattern {
+            background-color: #2e86de;
+            background-image: linear-gradient(135deg, #2e86de 0%, #10ac84 100%);
+        }
+        .dashboard-card {
+            transition: all 0.3s ease;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .progress-bar {
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            background-color: #e2e8f0;
+        }
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            background: linear-gradient(90deg, #2e86de 0%, #10ac84 100%);
+            transition: width 0.5s ease;
+        }
+        .task-item {
+            border-left: 4px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .task-item:hover {
+            border-left-color: #2e86de;
+            background-color: #f8fafc;
+        }
+        .notification-dot {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 12px;
+            height: 12px;
+            background-color: #ee5253;
+            border-radius: 50%;
+        }
+        .sidebar {
+            transition: all 0.3s ease;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                position: fixed;
+                z-index: 50;
+                height: 100vh;
+            }
+            .sidebar.open {
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Mobile Header -->
+    <header class="bg-white shadow-sm py-4 px-4 flex justify-between items-center md:hidden">
+        <button id="menuToggle" class="text-gray-600">
+            <i class="fas fa-bars text-xl"></i>
+        </button>
+        <div class="flex items-center">
+            <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-bold mr-2">
+                A
+            </div>
+            <span class="font-medium">Ama</span>
+        </div>
+        <div class="relative">
+            <i class="fas fa-bell text-gray-600 text-xl"></i>
+            <span class="notification-dot"></span>
+        </div>
+    </header>
+
+    <div class="flex">
+        <!-- Sidebar -->
+        <aside class="sidebar w-64 bg-white shadow-md h-screen fixed md:relative md:translate-x-0">
+            <div class="p-5 border-b">
+                <div class="flex items-center justify-center md:justify-start">
+                    <div class="bg-primary text-white rounded-full w-12 h-12 flex items-center justify-center mr-3">
+                        <i class="fas fa-laptop-code text-2xl"></i>
+                    </div>
+                    <h1 class="text-xl font-bold hidden md:block">GhanaDataEntry</h1>
+                </div>
+            </div>
+            
+            <div class="p-4 border-b">
+                <div class="flex items-center space-x-4 p-3 bg-light rounded-lg">
+                    <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white font-bold text-xl">
+                        A
+                    </div>
+                    <div>
+                        <h3 class="font-semibold">Ama Mensah</h3>
+                        <p class="text-sm text-gray-600">Kumasi, Ghana</p>
+                    </div>
+                </div>
+            </div>
+            
+            <nav class="p-4">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="#" class="flex items-center p-3 text-white bg-primary rounded-lg">
+                            <i class="fas fa-home mr-3"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center p-3 text-gray-700 hover:bg-light rounded-lg">
+                            <i class="fas fa-tasks mr-3"></i>
+                            <span>Tasks</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center p-3 text-gray-700 hover:bg-light rounded-lg">
+                            <i class="fas fa-money-bill-wave mr-3"></i>
+                            <span>Earnings</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center p-3 text-gray-700 hover:bg-light rounded-lg">
+                            <i class="fas fa-user mr-3"></i>
+                            <span>Profile</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center p-3 text-gray-700 hover:bg-light rounded-lg">
+                            <i class="fas fa-cog mr-3"></i>
+                            <span>Settings</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center p-3 text-gray-700 hover:bg-light rounded-lg">
+                            <i class="fas fa-question-circle mr-3"></i>
+                            <span>Help & Support</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="absolute bottom-0 w-full p-4 border-t">
+                <a href="#" class="flex items-center p-3 text-gray-700 hover:bg-light rounded-lg">
+                    <i class="fas fa-sign-out-alt mr-3"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-6">
+            <div class="max-w-7xl mx-auto">
+                <!-- Welcome Header -->
+                <div class="bg-white rounded-xl shadow-sm p-6 mb-6">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
+                        <div>
+                            <h1 class="text-2xl font-bold text-gray-800">Welcome back, Ama!</h1>
+                            <p class="text-gray-600">Here's your performance overview</p>
+                        </div>
+                        <div class="mt-4 md:mt-0">
+                            <button class="bg-primary hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg flex items-center">
+                                <i class="fas fa-plus mr-2"></i> New Task
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+                    <div class="dashboard-card bg-white p-6 rounded-xl shadow-sm">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-gray-600">Total Earnings</p>
+                                <h2 class="text-3xl font-bold text-gray-800">₵ 2,450</h2>
+                            </div>
+                            <div class="bg-green-100 p-3 rounded-full">
+                                <i class="fas fa-money-bill-wave text-green-600 text-xl"></i>
+                            </div>
+                        </div>
+                        <p class="text-sm text-green-600 mt-2"><i class="fas fa-arrow-up mr-1"></i> 12% from last week</p>
+                    </div>
+
+                    <div class="dashboard-card bg-white p-6 rounded-xl shadow-sm">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-gray-600">Tasks Completed</p>
+                                <h2 class="text-3xl font-bold text-gray-800">127</h2>
+                            </div>
+                            <div class="bg-blue-100 p-3 rounded-full">
+                                <i class="fas fa-tasks text-blue-600 text-xl"></i>
+                            </div>
+                        </div>
+                        <p class="text-sm text-blue-600 mt-2"><i class="fas fa-check-circle mr-1"></i> 15 tasks this week</p>
+                    </div>
+
+                    <div class="dashboard-card bg-white p-6 rounded-xl shadow-sm">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-gray-600">Accuracy Rate</p>
+                                <h2 class="text-3xl font-bold text-gray-800">96%</h2>
+                            </div>
+                            <div class="bg-purple-100 p-3 rounded-full">
+                                <i class="fas fa-chart-line text-purple-600 text-xl"></i>
+                            </div>
+                        </div>
+                        <p class="text-sm text-purple-600 mt-2"><i class="fas fa-trending-up mr-1"></i> 2% improvement</p>
+                    </div>
+
+                    <div class="dashboard-card bg-white p-6 rounded-xl shadow-sm">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-gray-600">Available Tasks</p>
+                                <h2 class="text-3xl font-bold text-gray-800">24</h2>
+                            </div>
+                            <div class="bg-orange-100 p-3 rounded-full">
+                                <i class="fas fa-clipboard-list text-orange-600 text-xl"></i>
+                            </div>
+                        </div>
+                        <p class="text-sm text-orange-600 mt-2"><i class="fas fa-bolt mr-1"></i> 8 new today</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Earnings Chart -->
+                    <div class="lg:col-span-2 bg-white p-6 rounded-xl shadow-sm">
+                        <div class="flex justify-between items-center mb-6">
+                            <h2 class="text-xl font-bold text-gray-800">Earnings Overview</h2>
+                            <select class="border border-gray-300 rounded-lg px-3 py-2 text-sm">
+                                <option>Last 7 Days</option>
+                                <option>Last 30 Days</option>
+                                <option>Last 90 Days</option>
+                            </select>
+                        </div>
+                        <div class="h-80">
+                            <canvas id="earningsChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm">
+                        <h2 class="text-xl font-bold text-gray-800 mb-6">Recent Activity</h2>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="bg-green-100 p-2 rounded-full mr-3">
+                                    <i class="fas fa-check-circle text-green-600"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium">Completed task #DT-2876</p>
+                                    <p class="text-sm text-gray-600">2 hours ago</p>
+                                    <p class="text-sm text-green-600">+₵18.50</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-blue-100 p-2 rounded-full mr-3">
+                                    <i class="fas fa-play-circle text-blue-600"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium">Started task #DT-2877</p>
+                                    <p class="text-sm text-gray-600">4 hours ago</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-purple-100 p-2 rounded-full mr-3">
+                                    <i class="fas fa-money-bill-wave text-purple-600"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium">Received payment</p>
+                                    <p class="text-sm text-gray-600">Yesterday</p>
+                                    <p class="text-sm text-green-600">+₵350.00</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-yellow-100 p-2 rounded-full mr-3">
+                                    <i class="fas fa-trophy text-yellow-600"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium">Accuracy bonus earned</p>
+                                    <p class="text-sm text-gray-600">2 days ago</p>
+                                    <p class="text-sm text-green-600">+₵25.00</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tasks Progress -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm">
+                        <h2 class="text-xl font-bold text-gray-800 mb-6">Weekly Goal</h2>
+                        <div class="mb-4">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-gray-700">Tasks completed</span>
+                                <span class="font-semibold">15/20</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-gray-700">Earnings target</span>
+                                <span class="font-semibold">₵285/₵400</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 71%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-gray-700">Accuracy goal</span>
+                                <span class="font-semibold">96%/95%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm">
+                        <h2 class="text-xl font-bold text-gray-800 mb-6">Current Tasks</h2>
+                        <div class="space-y-4">
+                            <div class="task-item p-4 border rounded-lg">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h3 class="font-semibold">Data Entry #DT-2877</h3>
+                                        <p class="text-sm text-gray-600">Product catalog categorization</p>
+                                    </div>
+                                    <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded">In Progress</span>
+                                </div>
+                                <div class="mt-3 flex items-center text-sm text-gray-500">
+                                    <i class="far fa-clock mr-1"></i>
+                                    <span>Started: Today, 10:30 AM</span>
+                                </div>
+                                <div class="mt-2">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <span class="text-xs text-gray-600">Progress</span>
+                                        <span class="text-xs font-medium">60%</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 60%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="task-item p-4 border rounded-lg">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h3 class="font-semibold">Data Verification #DV-1432</h3>
+                                        <p class="text-sm text-gray-600">Customer information validation</p>
+                                    </div>
+                                    <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">Assigned</span>
+                                </div>
+                                <div class="mt-3 flex items-center text-sm text-gray-500">
+                                    <i class="far fa-clock mr-1"></i>
+                                    <span>Assigned: Today, 9:15 AM</span>
+                                </div>
+                                <div class="mt-4">
+                                    <button class="w-full bg-primary hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg">
+                                        Start Task
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment History -->
+                <div class="bg-white p-6 rounded-xl shadow-sm mt-6">
+                    <h2 class="text-xl font-bold text-gray-800 mb-6">Payment History</h2>
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="text-left border-b">
+                                    <th class="pb-3">Date</th>
+                                    <th class="pb-3">Description</th>
+                                    <th class="pb-3">Method</th>
+                                    <th class="pb-3 text-right">Amount</th>
+                                    <th class="pb-3">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y">
+                                <tr>
+                                    <td class="py-3">Oct 12, 2023</td>
+                                    <td class="py-3">Weekly Payment</td>
+                                    <td class="py-3">MTN Mobile Money</td>
+                                    <td class="py-3 text-right font-medium text-green-600">₵350.00</td>
+                                    <td class="py-3"><span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Completed</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3">Oct 5, 2023</td>
+                                    <td class="py-3">Weekly Payment</td>
+                                    <td class="py-3">MTN Mobile Money</td>
+                                    <td class="py-3 text-right font-medium text-green-600">₵295.00</td>
+                                    <td class="py-3"><span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Completed</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3">Sep 28, 2023</td>
+                                    <td class="py-3">Weekly Payment</td>
+                                    <td class="py-3">MTN Mobile Money</td>
+                                    <td class="py-3 text-right font-medium text-green-600">₵312.50</td>
+                                    <td class="py-3"><span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Completed</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3">Sep 21, 2023</td>
+                                    <td class="py-3">Weekly Payment + Bonus</td>
+                                    <td class="py-3">MTN Mobile Money</td>
+                                    <td class="py-3 text-right font-medium text-green-600">₵385.00</td>
+                                    <td class="py-3"><span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Completed</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const menuToggle = document.getElementById('menuToggle');
+            const sidebar = document.querySelector('.sidebar');
+            
+            menuToggle.addEventListener('click', function() {
+                sidebar.classList.toggle('open');
+            });
+
+            // Earnings chart
+            const ctx = document.getElementById('earningsChart').getContext('2d');
+            const earningsChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    datasets: [{
+                        label: 'Daily Earnings (₵)',
+                        data: [42, 58, 40, 51, 48, 62, 45],
+                        backgroundColor: 'rgba(46, 134, 222, 0.1)',
+                        borderColor: '#2e86de',
+                        borderWidth: 2,
+                        tension: 0.3,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                drawBorder: false
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Simulate task progress animation
+            setTimeout(function() {
+                document.querySelectorAll('.progress-fill').forEach(bar => {
+                    const width = bar.style.width;
+                    bar.style.width = '0';
+                    setTimeout(function() {
+                        bar.style.width = width;
+                    }, 100);
+                });
+            }, 500);
+        });
+    </script>
+</body>
+</html>
